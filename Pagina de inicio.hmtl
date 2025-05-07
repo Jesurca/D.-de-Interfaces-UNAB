@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portal UNAB - Ingeniería de Sistemas</title>
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAflBMVEXvkAXvjwDuigDuiQDviwDvkAPvjADtjQD658nulAD66s7thgDyuG31w4jthAD24MHwnyfumiHvozv57dr9+fH00qX10KDyvXzzunXwsFz68uLyyYvwp0bxtWbwoC/1zpr13Lb+///zxI3vmgrurFPwwHz26tP66Mvurlz338Gb95v0AAAArklEQVQYlX2O3RaCIBCEgQXEFMgQKdIkMK33f8Ggn9Ndczffnp0ZhIowHDuC0VcYDqZfLaPs7Xllt8Gpo5GUFw8nfx79NF7SbBbI93Dtw+yjDXr1faAIdykMJ6GcuU+uSTkZd+tyE7UG0Upemj5AgM7gVdppu2zl5QcU3RQ00EqaPatHM8leunaJc8rTyEMPsTWTi4MNvmKI6EQo3hrOKVXiBfaYsR2UOPIF+A9AT3A9DPj/PLoYAAAAAElFTkSuQmCC">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <style>
+        /* Paleta de Colores UNAB (inspirada y adaptada) */
+        :root {
+            --primary-green: #84d800; /* Verde principal vibrante */
+            --dark-green: #2c5e1a; /* Verde oscuro UNAB */
+            --unab-blue: #003366; /* Azul institucional si se quiere usar */
+            --text-color-dark: #333;
+            --text-color-light: #fff;
+            --background-light: #f8f9fa; /* Fondo muy claro */
+            --surface-card: #fff;
+            --border-color: #e0e0e0;
+            --shadow-subtle: rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: var(--background-light);
+            color: var(--text-color-dark);
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        /* ===================================
+           Header Superior
+           =================================== */
+        .top-header {
+            background: linear-gradient(to right, var(--dark-green), var(--unab-blue)); /* Degradado sutil */
+            color: var(--text-color-light);
+            padding: 12px 25px; /* Más padding */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 8px var(--shadow-subtle);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .logo-placeholder {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700; /* Más grueso */
+            color: var(--primary-green); /* Verde brillante */
+            margin-right: 25px; /* Más espacio */
+            font-size: 1.3em;
+            letter-spacing: 0.5px;
+        }
+
+        .header-title {
+            font-size: 1.15em;
+            margin: 0;
+            color: rgba(255, 255, 255, 0.9); /* Blanco ligeramente transparente */
+            font-weight: 600;
+        }
+
+        .wireframe-nav {
+            display: flex;
+            gap: 20px; /* Más espacio entre enlaces */
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .wireframe-nav a {
+            color: var(--primary-green); /* Enlaces en verde brillante */
+            text-decoration: none;
+            font-size: 0.95em;
+            padding: 5px 0; /* Padding vertical */
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+            border-bottom: 2px solid transparent; /* Subrayado animado */
+        }
+
+        .wireframe-nav a:hover {
+            color: var(--text-color-light); /* Blanco en hover */
+            border-bottom-color: var(--primary-green); /* Subrayado verde brillante */
+        }
+
+        /* ===================================
+           Contenedor Principal (Sidebar + Content)
+           =================================== */
+        .main-container {
+            display: flex;
+            flex: 1;
+            flex-wrap: wrap;
+            padding: 20px; /* Añadir padding al contenedor principal */
+        }
+
+        /* ===================================
+           Sidebar Izquierda (Información de usuario y accesos)
+           =================================== */
+        .sidebar {
+            width: 280px; /* Ancho ligeramente mayor */
+            background-color: var(--dark-green); /* Fondo verde oscuro */
+            color: var(--text-color-light);
+            padding: 25px; /* Más padding */
+            border-radius: 8px; /* Bordes redondeados */
+            margin-right: 20px; /* Espacio a la derecha */
+            box-shadow: 0 4px 10px var(--shadow-subtle);
+            display: flex;
+            flex-direction: column;
+            gap: 25px; /* Más espacio entre secciones */
+            align-self: flex-start; /* Alinear arriba */
+        }
+
+        .user-info h3 {
+            margin-top: 0;
+            margin-bottom: 8px; /* Más espacio */
+            color: var(--primary-green); /* Nombre en verde brillante */
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+
+        .user-info p {
+            margin: 4px 0; /* Espacio entre párrafos */
+            font-size: 0.95em;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .quick-access h4 {
+            margin-top: 0;
+            color: var(--primary-green); /* Título en verde brillante */
+            margin-bottom: 15px; /* Más espacio */
+            border-bottom: 2px solid rgba(132, 216, 0, 0.5); /* Borde verde semitransparente */
+            padding-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .quick-access a {
+            display: block;
+            color: var(--text-color-light);
+            text-decoration: none;
+            padding: 10px 0; /* Más padding vertical */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Borde más sutil */
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+
+         .quick-access a:last-child {
+             border-bottom: none; /* Sin borde en el último elemento */
+        }
+
+        .quick-access a:hover {
+            color: var(--primary-green); /* Verde brillante en hover */
+            padding-left: 8px; /* Efecto de indentación */
+        }
+
+        /* ===================================
+           Área de Contenido Principal (Noticias/Tarjetas)
+           =================================== */
+        .content-area {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Tarjetas ligeramente más anchas */
+            gap: 20px;
+            padding: 0; /* Quitar padding aquí, ya está en main-container */
+        }
+
+        .news-card {
+            background-color: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px var(--shadow-subtle); /* Sombra más pronunciada */
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-7px); /* Mayor elevación */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15); /* Sombra más fuerte */
+        }
+
+        .card-image {
+            width: 100%;
+            height: 180px; /* Altura de imagen un poco mayor */
+            object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+        }
+
+        .card-content {
+            padding: 15px 20px; /* Más padding */
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-date {
+            font-size: 0.85em;
+            color: #777;
+            margin-bottom: 8px; /* Más espacio */
+        }
+
+        .card-title {
+            font-size: 1.2em;
+            color: var(--dark-green);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .card-link {
+            display: inline-block;
+            margin-top: auto;
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: color 0.3s ease;
+        }
+        .card-link:hover {
+            color: var(--unab-blue); /* Cambia a azul en hover */
+            text-decoration: underline;
+        }
+
+        .view-more-button {
+            display: block;
+            width: fit-content;
+            margin: 30px auto 10px auto; /* Más espacio arriba, centrado */
+            background-color: var(--primary-green);
+            color: var(--text-color-light);
+            padding: 12px 25px; /* Más padding */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 2px 5px var(--shadow-subtle);
+        }
+        .view-more-button:hover {
+            background-color: #6aa800; /* Verde un poco más oscuro */
+            transform: translateY(-1px); /* Efecto de clic sutil */
+        }
+
+
+        /* ===================================
+           Responsive Design
+           =================================== */
+        @media (max-width: 992px) { /* Ajuste para tablets y menores */
+             .main-container {
+                 flex-direction: column; /* Apilar sidebar y contenido */
+                 padding: 15px; /* Reducir padding general */
+             }
+             .sidebar {
+                 width: 100%; /* Sidebar ocupa todo el ancho */
+                 margin-right: 0; /* Quitar margen */
+                 margin-bottom: 20px; /* Espacio debajo del sidebar */
+                 padding: 20px;
+             }
+             .content-area {
+                 padding: 0;
+                 grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Ajustar tamaño mínimo de tarjeta */
+             }
+             .top-header {
+                 padding: 10px 15px;
+             }
+              .wireframe-nav {
+                  gap: 10px; /* Reducir espacio en nav */
+                  justify-content: center;
+                  width: 100%; /* Ocupar todo el ancho en móvil */
+                  margin-top: 10px;
+              }
+              .logo-placeholder {
+                  margin-right: 15px;
+              }
+        }
+
+         @media (max-width: 576px) { /* Ajuste para móviles */
+            .top-header {
+                 flex-direction: column;
+                 align-items: flex-start;
+             }
+             .header-left {
+                 margin-bottom: 10px;
+             }
+             .header-title {
+                 font-size: 1em;
+             }
+             .logo-placeholder {
+                 font-size: 1.2em;
+             }
+             .wireframe-nav a {
+                 font-size: 0.9em;
+                 padding: 3px 0;
+             }
+             .sidebar {
+                 padding: 15px;
+             }
+             .user-info h3 {
+                 font-size: 1.2em;
+             }
+             .quick-access a {
+                 font-size: 0.9em;
+                 padding: 8px 0;
+             }
+             .content-area {
+                 gap: 15px;
+             }
+             .card-title {
+                 font-size: 1.1em;
+             }
+         }
+         body {
+    /* Otras propiedades de body que ya tengas (font-family, margin, padding, color, display, min-height, flex-direction) */
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    /* background-color: var(--background-light); /* Puedes comentar o eliminar esta línea si la imagen cubre todo */
+    color: var(--text-color-dark); /* Mantén el color del texto principal */
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+
+    /* --- Propiedades para la imagen de fondo --- */
+    background-image: url('Fondo.jpg'); /* <-- Cambia esto por la ruta a tu imagen */
+    background-size: cover; /* La imagen cubrirá todo el fondo */
+    background-position: center center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-attachment: fixed; /* La imagen se queda fija al hacer scroll (opcional) */
+    background-color: var(--background-light); /* Color de respaldo si la imagen falla */
+    /* ------------------------------------------ */
+}
+
+/* Opcional: Overlay para mejorar la legibilidad */
+body::before {
+    content: '';
+    position: fixed; /* O absolute si quieres que se desplace con el contenido */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Ejemplo: capa negra con 50% de transparencia */
+    z-index: -1; /* Asegura que esté debajo del contenido principal */
+}
+    </style>
+</head>
+<body>
+
+    <div class="top-header">
+        <div class="header-left" style="display: flex; align-items: center;">
+            <span class="logo-placeholder"><img src="Logo sistemas.png" alt="" style="height: auto; width: 150px;"></span>
+            <h1 class="header-title" style="margin-left: 10px;">Mi Portal UNAB</h1>
+        </div>
+ 
+        <div class="header-right">
+            <div class="wireframe-nav">
+                <a href="horario_wireframe.html">Horario</a>
+                <a href="notificaciones_wireframe.html">Notificaciones</a>
+                <a href="directorio_wireframe.html">Directorio</a>
+                <a href="calendario_wireframe.html">Calendario</a>
+                <a href="recursos_wireframe.html">Recursos</a>
+                <a href="historial_wireframe.html">Historial</a>
+                <a href="actividades_wireframe.html">Actividades</a>
+                <a href="foro_wireframe.html">Foro</a>
+                <div class="notification-icon">
+  <i class="fas fa-bell"></i> <span class="notification-badge"></span>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <div class="user-info">
+                <h3>Jesus David Urbiñez Caselles</h3>
+                <p>Estudiante de Ingeniería de Sistemas</p>
+                <p>Código: [Tu Código]</p>
+            </div>
+            <div class="quick-access">
+                <h4>Accesos Rápidos</h4>
+                <a href="#">Mi Perfil</a>
+                <a href="#">Contacto con UNAB</a>
+                 <a href="#">Ayuda y Soporte</a>
+                </div>
+        </div>
+
+        <div class="content-area">
+            <div class="news-card">
+                <img src="cursos-informatica.png" alt="Imagen curso de informática" class="card-image">
+                <div class="card-content">
+                    <div class="card-date">Vie 03, May 2025</div>
+                    <h3 class="card-title">Cursos vacacionales de Informática (primer semestre 2025)</h3>
+                    <a href="https://unab.edu.co/cursos-de-informatica-primer-ciclo-primer-semestre-2025/" class="card-link">Ver más</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                 <img src="Noticias1.png" alt="Imagen noticias UNAB" class="card-image">
+                <div class="card-content">
+                    <div class="card-date">Vie 03, May 2025</div>
+                    <h3 class="card-title">Información para presentar la prueba de homologación Institucional IEP</h3>
+                     <a href="#" class="card-link">Ver más</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                 <img src="Noticias4.png" alt="Imagen evento UNAB" class="card-image">
+                <div class="card-content">
+                    <div class="card-date">Jue 02, May 2025</div>
+                    <h3 class="card-title">Visita de Auditor de la Red DHLA-AHK al programa de Administración de Empresas modalidad dual</h3>
+                     <a href="#" class="card-link">Ver más</a>
+                </div>
+            </div>
+
+             <div class="news-card">
+                  <img src="Noticias4.png" alt="Imagen noticia UNAB" class="card-image">
+                <div class="card-content">
+                    <div class="card-date">Lun 29, Abr 2025</div>
+                    <h3 class="card-title">Cursos intensivos de inglés para estudiantes pregrado profesional de VI semestre aplazado en adelante</h3>
+                     <a href="#" class="card-link">Ver más</a>
+                </div>
+            </div>
+
+             <div class="news-card">
+                  <img src="Noticias2.png" alt="Imagen UNAB" class="card-image">
+                <div class="card-content">
+                    <div class="card-date">Vie 26, Abr 2025</div>
+                    <h3 class="card-title">La UNAB conforma Comité del Sistema Integrado de Gestión de Calidad para 2025</h3>
+                     <a href="#" class="card-link">Ver más</a>
+                </div>
+            </div>
+
+             <div class="news-card">
+                  <img src="Becados-SaberPro_01-1-scaled.jpg" alt="Imagen UNAB general" class="card-image">
+                <div class="card-content">
+                    <div class="card-date">Vie 26, Abr 2025</div>
+                    <h3 class="card-title">Becas para graduados con mejor desempeño en pruebas nacionales</h3>
+                     <a href="#" class="card-link">Ver más</a>
+                </div>
+            </div>
+
+             <div class="news-card">
+                 <img src="Noticias2.png" alt="Imagen UNAB tecnología" class="card-image">
+                <div class="card-content">
+                    <div class="card-date">Vie 26, Abr 2025</div>
+                    <h3 class="card-title">Actualización Suite Visión Empresarial - Software de Gestión Estratégica</h3>
+                     <a href="#" class="card-link">Ver más</a>
+                </div>
+            </div>
+
+            <button class="view-more-button">Cargar más noticias</button>
+
+
+        </div>
+    </div>
+
+    <script>
+        // Script JS (sin cambios mayores para la funcionalidad visual)
+        // Puedes añadir aquí scripts para interactividad futura como modals, etc.
+    </script>
+
+</body>
+</html>
