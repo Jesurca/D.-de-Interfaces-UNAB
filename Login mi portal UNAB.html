@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es"> <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAflBMVEXvkAXvjwDuigDuiQDviwDvkAPvjADtjQD658nulAD66s7thgDyuG31w4jthAD24MHwnyfumiHvozv57dr9+fH00qX10KDyvXzzunXwsFz68uLyyYvwp0bxtWbwoC/1zpr13Lb+///zxI3vmgrurFPwwHz26tP66Mvurlz338Gb95v0AAAArklEQVQYlX2O3RaCIBCEgQXEFMgQKdIkMK33f8Ggn9Ndczffnp0ZhIowHDuC0VcYDqZfLaPs7Xllt8Gpo5GUFw8nfx79NF7SbBbI93Dtw+yjDXr1faAIdykMJ6GcuU+uSTkZd+tyE7UG0Upemj5AgM7gVdppu2zl5QcU3RQ00EqaPatHM8leunaJc8rTyEMPsTWTi4MNvmKI6EQo3hrOKVXiBfaYsR2UOPIF+A9AT3A9DPj/PLoYAAAAAElFTkSuQmCC" type="image/x-icon">
+    <title>UNAB - Bienvenido a Nuestra Comunidad</title> <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        h1, h2 {
+            font-family: 'Georgia', 'Times New Roman', Times, serif;
+            color: #2c5e1a;
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        p {
+            font-family: 'Open Sans', sans-serif;
+            color: #444;
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        button {
+            font-family: inherit;
+            background-color: #497b17;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3a6312;
+            transform: scale(1.05);
+        }
+
+        body {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            grid-template-rows: auto auto 1fr;
+            grid-template-areas:
+                "top-nav top-nav"
+                "campus hero"
+                "campus content";
+        }
+
+        header,
+        .hero,
+        .content-container {
+            margin-left: 40vw;
+        }
+
+        .top-navigation {
+            grid-area: top-nav;
+            background-color: #808080;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .menu-icon:hover {
+            transform: scale(1.2);
+            color: #d4edda;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            background-color: #3a6312;
+            width: 200px;
+            padding: 10px;
+            z-index: 10;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .dropdown-menu.open {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #d4edda;
+            color: #1f1f1f;
+            transform: translateX(5px);
+        }
+
+        .campus-container {
+            grid-area: campus;
+            width: 40vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin-left: 0;
+            transition: all 0.5s ease;
+        }
+
+        .campus-container:hover {
+            width: 42vw;
+        }
+
+        .campus-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+            filter: brightness(0.9) contrast(1.1);
+        }
+
+        .campus-container:hover img {
+            transform: scale(1.1);
+            filter: brightness(1.1) contrast(1.2) saturate(1.2);
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        }
+
+        header {
+            grid-area: hero;
+            background-image: url("https://i.pinimg.com/736x/6a/cc/d3/6accd31a9ce5c63df9a8241f92b6310a.jpg");
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero {
+            grid-area: hero;
+            background-image: url("https://i.pinimg.com/736x/6a/cc/d3/6accd31a9ce5c63df9a8241f92b6310a.jpg");
+            background-size: cover;
+            background-position: center;
+            padding: 50px 20px;
+            text-align: center;
+            color: #fff;
+        }
+
+         .hero h2, .hero p {
+             color: #fff;
+         }
+
+        .content-container {
+            grid-area: content;
+            display: flex;
+            flex-direction: column;
+        }
+
+        section:not(.community-section) {
+            padding: 20px;
+            margin: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        section:not(.community-section):hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .image-gallery div {
+            flex: 1 1 calc(30% - 20px);
+            margin: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .image-gallery div:hover {
+            transform: scale(1.03);
+        }
+
+        .image-gallery img {
+            max-width: 100%;
+            border-radius: 8px;
+            height: auto;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+         .image-gallery img:hover {
+             transform: scale(1.08);
+             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+             filter: brightness(1.05);
+         }
+
+        .community-section {
+            padding: 25px;
+            margin: 20px auto;
+            background-color: #5e9b23;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 320px;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .community-section:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+         .community-section h2,
+         .community-section p,
+         .community-section p a {
+             color: #fff !important;
+         }
+
+        .community-section h2 {
+            text-align: center;
+            font-weight: normal;
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .community-section .login-form {
+            width: 100%;
+            max-width: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .community-section .login-form input {
+            width: 100%;
+            height: 40px;
+            margin-top: 10px;
+            background: rgba(255,255,255,.5);
+            border: 1px solid rgba(255,255,255,.1);
+            padding: 0 15px;
+            color: #333;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        .community-section .login-form input:focus {
+            border: 1px solid rgba(255,255,255,.8);
+            outline: none;
+            transform: scale(1.02);
+            box-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        .community-section .login-form input::placeholder {
+            color: #333;
+        }
+
+        .community-section .login-form input.submit {
+            background: rgba(255, 255, 255, 0.9);
+            color: #2c5e1a;
+            font-size: 15px;
+            margin-top: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+         .community-section .login-form input.submit:hover {
+             background-color: #fff;
+             color: #374034;
+             transform: scale(1.05);
+         }
+
+        .community-section .login-form p {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .community-section .login-form p a {
+            text-decoration: underline;
+            transition: all 0.3s ease;
+        }
+
+        .community-section .login-form p a:hover {
+            color: #d4edda !important;
+            text-decoration: none;
+        }
+
+        .community-section .background-images {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .community-section .background-images img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: all 1s ease-in-out;
+            filter: brightness(0.7);
+        }
+
+        .community-section .background-images img.active {
+            opacity: 1;
+        }
+
+        header h1,
+        .hero h2,
+        .hero p,
+        .image-gallery p,
+        section:not(.community-section) h2,
+        section:not(.community-section) p {
+            transition: all 0.3s ease;
+        }
+
+        header h1:hover,
+        .hero h2:hover,
+        .hero p:hover,
+        .image-gallery p:hover,
+        section:not(.community-section) h2:hover,
+        section:not(.community-section) p:hover {
+            transform: scale(1.05);
+            color: #1a4d2e;
+            text-shadow: 0 0 5px rgba(44,94,26,0.1);
+        }
+
+        header h1:hover {
+            transform: scale(1.08);
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto 1fr;
+                grid-template-areas:
+                    "top-nav"
+                    "campus"
+                    "hero"
+                    "content";
+            }
+
+            .campus-container {
+                grid-area: campus;
+                width: 100vw;
+                height: 30vh;
+                position: static;
+                margin-left: 0;
+            }
+
+            .campus-container img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+                filter: none;
+                 transform: scale(1);
+             }
+             .campus-container:hover,
+             .campus-container:hover img {
+                 transform: scale(1);
+                 filter: none;
+                 width: 100vw;
+             }
+
+            header,
+            .hero,
+            .content-container {
+                margin-left: 0;
+            }
+
+             section:not(.community-section) {
+                 margin: 20px;
+             }
+
+            .community-section {
+                width: 90%;
+                margin: 20px auto;
+                height: auto;
+                padding: 20px;
+                 margin-left: auto;
+                 margin-right: auto;
+            }
+
+            .community-section .login-form {
+                width: 100%;
+            }
+
+            header h1:hover,
+            .hero h2:hover,
+            .hero p:hover,
+            .image-gallery p:hover,
+            section:not(.community-section) h2:hover,
+            section:not(.community-section) p:hover,
+            section:not(.community-section):hover,
+            .community-section:hover {
+                transform: scale(1) !important;
+                color: inherit;
+                text-shadow: none;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            }
+
+             .image-gallery img:hover,
+             .image-gallery div:hover {
+                 transform: scale(1) !important;
+                 box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+             }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-navigation">
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <div></div> </div>
+
+    <div class="dropdown-menu" id="dropdownMenu">
+        <a href="#">Admisiones</a>
+        <a href="#">Programas</a>
+        <a href="#">Investigación</a>
+        <a href="#">Conoce Nuestros Planes</a>
+        <a href="#">Contacto</a>
+    </div>
+
+    <div class="campus-container">
+        <img src="campus.jpg" alt="Impresionante Campus UNAB">
+    </div>
+
+    <header>
+        <h1>Bienvenido a la UNAB</h1>
+    </header>
+
+    <div class="hero">
+        <h2>Bienvenido a la UNAB</h2>
+        <p>Unete A La Mejor Comunidad De Aprendizaje De Bucaramanga.</p>
+    </div>
+
+    <div class="content-container">
+
+        <section class="community-section">
+            <h2>Entra A Tu Cuenta</h2>
+            <div class="login-form">
+                <input type="text" placeholder="Nombre de usuario"> <input type="password" placeholder="Contraseña"> <input type="submit" value="Iniciar Sesión" class="submit"> <p><a href="#">¿Olvidaste tu contraseña?</a></p>
+            </div>
+            <div class="background-images">
+                <img src="c:\Users\Asus\Desktop\Interfaz\campuss3.jpg">
+                <img src="c:\Users\Asus\Desktop\Interfaz\est.jpg">
+                <img src="c:\Users\Asus\Desktop\Interfaz\auditorio.jpg">
+            </div>
+        </section>
+
+        <section class="image-gallery">
+             
+            <div>
+                <img src="c:\Users\Asus\Desktop\Interfaz\Estudiantes-en-la-biblioteca.jpg" alt="Vida Estudiantil"> <p>Experimenta la vibrante vida estudiantil en la UNAB.</p> </div>
+            <div>
+                <img src="c:\Users\Asus\Desktop\Interfaz\img-unabfest-2025.png" alt="Eventos"> <p>Participa en emocionantes eventos y actividades.</p> </div>
+        </section>
+
+        <section>
+            <h2>Noticias Recientes</h2>
+            <p>Mantente informado sobre las últimas noticias y eventos de la UNAB.</p>
+         </section>
+
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("dropdownMenu");
+            menu.classList.toggle("open");
+        }
+
+        const backgroundImages = document.querySelectorAll('.community-section .background-images img');
+        let currentIndex = 0;
+
+        function changeBackground() {
+            backgroundImages.forEach(img => img.classList.remove('active'));
+            currentIndex = (currentIndex + 1) % backgroundImages.length;
+            backgroundImages[currentIndex].classList.add('active');
+        }
+
+        setInterval(changeBackground, 3000);
+    </script>
+
+</body>
+</html>
